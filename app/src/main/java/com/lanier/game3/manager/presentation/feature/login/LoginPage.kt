@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -63,6 +65,13 @@ fun LoginPage(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth(),
+            singleLine = true,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "account"
+                )
+            },
             label = {
                 Text(text = stringResource(R.string.input_account))
             },
@@ -75,6 +84,13 @@ fun LoginPage(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth(),
+            singleLine = true,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = "account"
+                )
+            },
             label = {
                 Text(text = stringResource(R.string.input_password))
             },
