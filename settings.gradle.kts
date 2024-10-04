@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Game3Manager"
 include(":app")
 include(":data")
+include(":domain")

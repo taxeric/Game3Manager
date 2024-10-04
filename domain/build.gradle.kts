@@ -7,15 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.lanier.game3.manager.data"
+    namespace = "com.lanier.game3.domain"
 }
 
 dependencies {
 
-    implementation(project(":domain"))
-
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
+    api(libs.kotlinx.coroutines.core)
+    api(libs.kotlinx.coroutines.android)
+    api(libs.kotlinx.serialization.json)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
