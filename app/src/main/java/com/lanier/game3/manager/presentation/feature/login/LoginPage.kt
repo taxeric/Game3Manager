@@ -13,7 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -28,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lanier.game3.manager.R
+import com.lanier.game3.manager.presentation.feature.login.hostedit.HostEditDialog
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -40,6 +45,21 @@ fun LoginPage(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        IconButton(
+            modifier = Modifier
+                .align(Alignment.End),
+            onClick = {
+                viewModel.onHostEditDialogUiStateChanged(
+                    HostEditDialogUiState.Show
+                )
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Settings,
+                contentDescription = "settings"
+            )
+        }
+        Spacer(modifier = Modifier.height(32.dp))
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -68,6 +88,22 @@ fun LoginPage(
             viewModel.login(it)
         }
     }
+
+    HostEditDialog(
+        state = viewModel.hostEditDialogUiState,
+        defValue = { viewModel.hostAddressState.address },
+        onDismissRequest = { needSave ->
+            if (needSave == true) {
+                viewModel.saveHostAddress()
+            }
+            viewModel.onHostEditDialogUiStateChanged(
+                HostEditDialogUiState.Hide
+            )
+        },
+        onChanged = { newAddress ->
+            viewModel.onHostAddressChanged(newAddress)
+        }
+    )
 }
 
 @Composable

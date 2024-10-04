@@ -13,3 +13,16 @@ data class LoginState(
     val loginBtnEnabled: Boolean
         get() = inputPassword.isNotBlank() && inputAccount.isNotBlank()
 }
+
+data class HostAddressState(
+    val address: String,
+)
+
+/**
+ * 地址编辑对话框显隐状态
+ */
+sealed interface HostEditDialogUiState {
+
+    data object Hide: HostEditDialogUiState
+    data object Show: HostEditDialogUiState
+}

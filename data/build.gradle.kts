@@ -8,6 +8,12 @@ plugins {
 
 android {
     namespace = "com.lanier.game3.manager.data"
+
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 28
+    }
 }
 
 dependencies {

@@ -31,6 +31,18 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     )
         private set
 
+    var hostAddressState by mutableStateOf(
+        HostAddressState(
+            address = "", // todo 这里读取本地存储的地址
+        )
+    )
+        private set
+
+    var hostEditDialogUiState: HostEditDialogUiState by mutableStateOf(
+        HostEditDialogUiState.Hide
+    )
+        private set
+
     fun onAccountChanged(newValue: String) {
         loginState = loginState.copy(
             inputAccount = newValue
@@ -41,6 +53,16 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         loginState = loginState.copy(
             inputPassword = newValue
         )
+    }
+
+    fun onHostAddressChanged(newValue: String) {
+        hostAddressState = hostAddressState.copy(
+            address = newValue
+        )
+    }
+
+    fun onHostEditDialogUiStateChanged(state: HostEditDialogUiState) {
+        hostEditDialogUiState = state
     }
 
     fun login(
@@ -54,5 +76,8 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             loadingState?.value = false
             loginJob = null
         }
+    }
+
+    fun saveHostAddress() {
     }
 }
