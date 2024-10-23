@@ -7,12 +7,20 @@ plugins {
 }
 
 android {
-    namespace = "com.lanier.game3.domain"
+    namespace = "com.lanier.game3.manager.domain"
 
     compileSdk = 34
 
     defaultConfig {
         minSdk = 28
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    kotlinOptions {
+        jvmTarget = "21"
     }
 }
 
