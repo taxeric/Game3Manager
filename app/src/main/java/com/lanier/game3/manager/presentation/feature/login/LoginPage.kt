@@ -34,13 +34,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lanier.game3.manager.R
+import com.lanier.game3.manager.presentation.ext.gotoCropPage
 import com.lanier.game3.manager.presentation.feature.login.hostedit.HostEditDialog
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
 fun LoginPage(
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator
 ) {
     Column(
         modifier = Modifier
@@ -101,7 +104,14 @@ fun LoginPage(
         )
         Spacer(modifier = Modifier.height(36.dp))
         LoginBtn {
-            viewModel.login(it)
+//            viewModel.login(it)
+            navigator.gotoCropPage(
+                cropId = null,
+                season = null,
+                seedId = null,
+                name = null,
+                price = null,
+            )
         }
     }
 

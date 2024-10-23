@@ -6,4 +6,14 @@
     <string name="text_login">登录</string>
     <string name="input_new_api_address_title">输入服务器地址</string>
     <string name="new_api_address">新地址</string>
+
+    <string name="seed_id">种子id</string>
+    <string name="name">名称</string>
+    <string name="price">价格</string>
+    <string name="season">季节</string>
+    <string name="season_none">无</string>
+    <string name="season_spring">春季</string>
+    <string name="season_summer">夏季</string>
+    <string name="season_autumn">秋季</string>
+    <string name="season_winter">冬季</string>
 </resources>
