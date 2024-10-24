@@ -17,4 +17,6 @@
     <string name="season_summer">夏季</string>
     <string name="season_autumn">秋季</string>
     <string name="season_winter">冬季</string>
+
+    <string name="seed_manage">种子管理</string>
 </resources>
