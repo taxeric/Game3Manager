@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lanier.game3.manager.R
 import com.lanier.game3.manager.presentation.ext.gotoCropPage
+import com.lanier.game3.manager.presentation.ext.gotoSeedPage
 import com.lanier.game3.manager.presentation.feature.login.hostedit.HostEditDialog
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -105,12 +106,18 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(36.dp))
         LoginBtn {
 //            viewModel.login(it)
-            navigator.gotoCropPage(
+            navigator.gotoSeedPage(
                 cropId = null,
                 season = null,
                 seedId = null,
                 name = null,
                 price = null,
+                maxHarvestCount = null,
+                cropExpPer = null,
+                desc = null,
+                singleHarvestAmount = null,
+                stageInfo = null,
+                plantLevel = null
             )
         }
     }

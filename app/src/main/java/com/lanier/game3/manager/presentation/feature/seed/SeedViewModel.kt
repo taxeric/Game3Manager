@@ -70,9 +70,15 @@ class SeedViewModel @Inject constructor(
         )
     }
 
-    fun changeSeason(newValue: Season) {
+    fun changeSeason(newValue: Int) {
         seedUiState = seedUiState.copy(
-            season = newValue
+            season = when (newValue) {
+                1 -> Season.Spring
+                2 -> Season.Summer
+                3 -> Season.Autumn
+                4 -> Season.Winter
+                else -> Season.None
+            }
         )
     }
 

@@ -3,7 +3,9 @@ package com.lanier.game3.manager.presentation.ext
 import androidx.navigation.NavController
 import com.lanier.game3.domain.model.Crop
 import com.lanier.game3.manager.presentation.feature.destinations.CropPageDestination
+import com.lanier.game3.manager.presentation.feature.destinations.SeedPageDestination
 import com.lanier.game3.manager.presentation.navmodel.CropNavArgs
+import com.lanier.game3.manager.presentation.navmodel.SeedNavArgs
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 /**
@@ -33,3 +35,36 @@ fun DestinationsNavigator.gotoCropPage(
     }
 }
 
+fun DestinationsNavigator.gotoSeedPage(
+    cropId: Int?,
+    name: String?,
+    price: Int?,
+    desc: String?,
+    season: Int?,
+    maxHarvestCount: Int?,
+    cropExpPer: Int?,
+    singleHarvestAmount: Int?,
+    stageInfo: String?,
+    plantLevel: Int?,
+    seedId: Int? = null,
+) {
+    navigate(
+        SeedPageDestination(
+            SeedNavArgs(
+                seedId = seedId,
+                cropId = cropId,
+                name = name,
+                price = price,
+                desc = desc,
+                season = season,
+                maxHarvestCount = maxHarvestCount,
+                cropExpPer = cropExpPer,
+                singleHarvestAmount = singleHarvestAmount,
+                stageInfo = stageInfo,
+                plantLevel = plantLevel
+            )
+        )
+    ) {
+        launchSingleTop = true
+    }
+}
