@@ -1,7 +1,5 @@
 package com.lanier.game3.manager.presentation.ext
 
-import androidx.navigation.NavController
-import com.lanier.game3.domain.model.Crop
 import com.lanier.game3.manager.presentation.feature.destinations.CropPageDestination
 import com.lanier.game3.manager.presentation.feature.destinations.SeedPageDestination
 import com.lanier.game3.manager.presentation.navmodel.CropNavArgs
