@@ -11,8 +11,11 @@ data class LoginReqModel(
 )
 
 data class LoginRespModel(
-    val userId: Int,
     val account: String,
-    val username: String,
+    val balance: Int,
     val gender: Int,
+    val id: Int,
+    val lands: List<Land>,
+    val token: String,
+    val username: String
 )

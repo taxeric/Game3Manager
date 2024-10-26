@@ -104,20 +104,20 @@ fun LoginPage(
         )
         Spacer(modifier = Modifier.height(36.dp))
         LoginBtn {
-//            viewModel.login(it)
-            navigator.gotoSeedPage(
-                cropId = null,
-                season = null,
-                seedId = null,
-                name = null,
-                price = null,
-                maxHarvestCount = null,
-                cropExpPer = null,
-                desc = null,
-                singleHarvestAmount = null,
-                stageInfo = null,
-                plantLevel = null
-            )
+            viewModel.login(it)
+//            navigator.gotoSeedPage(
+//                cropId = null,
+//                season = null,
+//                seedId = null,
+//                name = null,
+//                price = null,
+//                maxHarvestCount = null,
+//                cropExpPer = null,
+//                desc = null,
+//                singleHarvestAmount = null,
+//                stageInfo = null,
+//                plantLevel = null
+//            )
         }
     }
 
