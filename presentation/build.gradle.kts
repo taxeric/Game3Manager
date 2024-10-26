@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 
@@ -8,28 +8,14 @@ plugins {
 }
 
 android {
-    namespace = "com.lanier.game3.manager"
+    namespace = "com.lanier.game3.manager.presentation"
+
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.lanier.game3.manager"
         minSdk = 28
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
@@ -37,16 +23,14 @@ android {
     kotlinOptions {
         jvmTarget = "21"
     }
+
     buildFeatures {
         compose = true
     }
 }
 
 dependencies {
-
-    implementation(project(":presentation"))
     implementation(project(":domain"))
-    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -57,9 +41,11 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    implementation(libs.compose.destinations.anim.core)
+    ksp(libs.compose.destinations.ksp)
+
     implementation(libs.hilt.navigationCompose)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-
 }

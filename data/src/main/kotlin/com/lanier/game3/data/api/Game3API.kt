@@ -17,27 +17,27 @@ import retrofit2.http.Query
  */
 interface Game3API {
 
-    @POST("/")
+    @POST("/login")
     suspend fun login(@Body model: LoginReqModel) : BaseAPIModel<LoginRespModel>
 
-    @GET("/")
+    @GET("/get-crops")
     suspend fun getCrops(
         @Query("offset") offset: Int,
         @Query("limit") limit: Int,
     ) : BaseAPIModel<List<CropModel>>
 
-    @POST("/")
+    @POST("/upsert-crop")
     suspend fun saveCrop(
         @Body model: CropModel
     ) : BaseAPIModel<Boolean>
 
-    @GET("/")
+    @GET("/get-seed")
     suspend fun getSeeds(
         @Query("offset") offset: Int,
         @Query("limit") limit: Int,
     ) : BaseAPIModel<List<SeedModel>>
 
-    @POST("/")
+    @POST("/upsert-seed")
     suspend fun saveSeed(
         @Body model: SeedModel
     ) : BaseAPIModel<Boolean>

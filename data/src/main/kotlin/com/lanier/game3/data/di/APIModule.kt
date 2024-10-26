@@ -23,7 +23,7 @@ object APIModule {
     @Singleton
     fun provideGame3API() : Game3API {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("http://192.168.31.80:8080/")
             .callFactory(okhttpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
