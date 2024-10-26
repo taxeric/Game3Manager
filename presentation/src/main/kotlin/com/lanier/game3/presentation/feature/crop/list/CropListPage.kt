@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -61,6 +62,8 @@ fun CropListPage(
         )
 
         CropList(
+            modifier = Modifier
+                .padding(horizontal = 12.dp),
             data = { viewmodel.crops },
             onLoadMore = {
                 if (viewmodel.isLoading.not()) {
@@ -106,7 +109,6 @@ private fun CropList(
         ) { _, data ->
             CropItem(
                 crop = data,
-                isLatest = false,
                 onClick = { onClick.invoke(data) }
             )
         }
@@ -117,14 +119,13 @@ private fun CropList(
 private fun CropItem(
     modifier: Modifier = Modifier,
     crop: CropModel,
-    isLatest: Boolean,
     onClick: () -> Unit,
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
             .clickable { onClick.invoke() }
+            .padding(8.dp)
     ) {
         Text(
             text = "${crop.cropId}",
@@ -146,8 +147,10 @@ private fun CropItem(
                 style = MaterialTheme.typography.bodySmall
             )
         }
-        if (isLatest.not()) {
-            VerticalDivider()
-        }
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = "${crop.price}",
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }

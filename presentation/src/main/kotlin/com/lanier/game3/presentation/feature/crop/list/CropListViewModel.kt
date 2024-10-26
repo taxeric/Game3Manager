@@ -8,6 +8,7 @@ import com.lanier.game3.domain.model.CropModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,11 +42,16 @@ class CropListViewModel @Inject constructor(
     }
 
     fun getCrops(refresh: Boolean = false, limit: Int = 20) {
-        if (refresh) page = 0
+        if (refresh) {
+            page = 0
+        } else {
+            if (isEnd) return
+        }
         val oldJob = getCropsJob
         getCropsJob = viewModelScope.launch {
             oldJob?.cancelAndJoin()
             isLoading = true
+            delay(1000L)
             getCropsUseCase(
                 offset = page,
                 limit = limit
