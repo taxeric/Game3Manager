@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.lanier.game3.manager.presentation.R
 import com.lanier.game3.presentation.composable.AppTopBar
+import com.lanier.game3.presentation.ext.gotoCropListPage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -45,6 +46,7 @@ fun HomePage(
 
         OutlinedButton(
             onClick = {
+                navigator.gotoCropListPage()
             }
         ) {
             Text(

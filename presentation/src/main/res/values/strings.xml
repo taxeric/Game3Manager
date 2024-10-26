@@ -6,6 +6,8 @@
     <string name="input_new_api_address_title">输入服务器地址</string>
     <string name="new_api_address">新地址</string>
 
+    <string name="crop_list">作物列表</string>
+
     <string name="crop_manage">作物管理</string>
     <string name="seed_id">种子id</string>
     <string name="name">名称</string>
