@@ -29,6 +29,9 @@ class CropListViewModel @Inject constructor(
     var isEnd: Boolean = false
         private set
 
+    var isLoading: Boolean = false
+        private set
+
     private var isInitialization = false
 
     fun initialization() {
@@ -42,6 +45,7 @@ class CropListViewModel @Inject constructor(
         val oldJob = getCropsJob
         getCropsJob = viewModelScope.launch {
             oldJob?.cancelAndJoin()
+            isLoading = true
             getCropsUseCase(
                 offset = page,
                 limit = limit
@@ -60,6 +64,7 @@ class CropListViewModel @Inject constructor(
                 .onFailure {
                     println(it)
                 }
+            isLoading = false
             getCropsJob = null
         }
     }

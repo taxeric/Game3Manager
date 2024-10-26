@@ -10,11 +10,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,7 +61,12 @@ fun CropListPage(
         )
 
         CropList(
-            data = { viewmodel.crops }
+            data = { viewmodel.crops },
+            onLoadMore = {
+                if (viewmodel.isLoading.not()) {
+                    viewmodel.getCrops(refresh = false)
+                }
+            }
         ) { crop ->
             navigator.gotoCropPage(crop)
         }
@@ -67,8 +77,25 @@ fun CropListPage(
 private fun CropList(
     modifier: Modifier = Modifier,
     data: () -> SnapshotStateList<CropModel>,
+    onLoadMore: () -> Unit,
     onClick: (CropModel) -> Unit,
 ) {
+    val listState = rememberLazyListState()
+    val reachedBottom by remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex + listState.layoutInfo.visibleItemsInfo.size ==
+                    listState.layoutInfo.totalItemsCount
+        }
+    }
+    LaunchedEffect(key1 = listState) {
+        snapshotFlow { reachedBottom }
+            .collect { isReachedBottom ->
+                if (isReachedBottom) {
+                    onLoadMore.invoke()
+                }
+            }
+    }
+
     LazyColumn(
         modifier = modifier
             .fillMaxWidth(),
