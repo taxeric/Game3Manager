@@ -1,6 +1,7 @@
 package com.lanier.game3.data.di
 
 import com.lanier.game3.data.api.Game3API
+import com.lanier.game3.data.interceptor.HeaderInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +33,7 @@ object APIModule {
 
     private fun okhttpClient() : OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(HeaderInterceptor())
             .build()
     }
 }
