@@ -1,6 +1,7 @@
 package com.lanier.game3.domain.feature.login
 
 import com.lanier.game3.domain.model.LoginRespModel
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Desc:
@@ -10,4 +11,8 @@ import com.lanier.game3.domain.model.LoginRespModel
 interface LoginRepository {
 
     suspend fun login(account: String, password: String) : Result<LoginRespModel>
+
+    suspend fun setLoginState(model: LoginRespModel)
+
+    fun getLoginStateFlow() : StateFlow<Boolean>
 }

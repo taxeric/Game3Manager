@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lanier.game3.domain.feature.login.LoginSetStateUseCase
+import com.lanier.game3.domain.feature.login.LoginStateFlowUseCase
 import com.lanier.game3.domain.feature.login.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -21,7 +23,11 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
+    private val loginSetStateUseCase: LoginSetStateUseCase,
+    loginStateFlowUseCase: LoginStateFlowUseCase,
 ) : ViewModel() {
+
+    val isLoggedInFlow = loginStateFlowUseCase.invoke()
 
     private var loginJob: Job? = null
 
@@ -79,7 +85,7 @@ class LoginViewModel @Inject constructor(
                 password = loginUiState.inputPassword,
             )
                 .onSuccess {
-                    println(it)
+                    loginSetStateUseCase.invoke(it)
                 }
                 .onFailure {
                     println(it)
