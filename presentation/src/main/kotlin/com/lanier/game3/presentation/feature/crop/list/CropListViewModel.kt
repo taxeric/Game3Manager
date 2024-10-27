@@ -1,6 +1,9 @@
 package com.lanier.game3.presentation.feature.crop.list
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lanier.game3.domain.feature.crop.GetCropsUseCase
@@ -24,6 +27,11 @@ class CropListViewModel @Inject constructor(
 
     private var getCropsJob: Job? = null
 
+    var pageScrollItemIndex by mutableIntStateOf(0)
+        private set
+    var pageScrollOffset by mutableIntStateOf(0)
+        private set
+
     val crops = mutableStateListOf<CropModel>()
     var page: Int = 0
         private set
@@ -39,6 +47,11 @@ class CropListViewModel @Inject constructor(
         if (isInitialization) return
         isInitialization = true
         getCrops(refresh = true)
+    }
+
+    fun updateScrollPosition(newIndex: Int, newOffset: Int) {
+        pageScrollItemIndex = newIndex
+        pageScrollOffset = newOffset
     }
 
     fun getCrops(refresh: Boolean = false, limit: Int = 20) {

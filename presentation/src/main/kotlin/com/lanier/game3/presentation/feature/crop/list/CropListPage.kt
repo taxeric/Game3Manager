@@ -11,10 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -64,6 +62,14 @@ fun CropListPage(
         CropList(
             modifier = Modifier
                 .padding(horizontal = 12.dp),
+            startIndex = { viewmodel.pageScrollItemIndex },
+            startOffset = { viewmodel.pageScrollOffset },
+            onChangeScrollPosition = { newIndex, newOffset ->
+                viewmodel.updateScrollPosition(
+                    newIndex = newIndex,
+                    newOffset = newOffset,
+                )
+            },
             data = { viewmodel.crops },
             onLoadMore = {
                 if (viewmodel.isLoading.not()) {
@@ -79,16 +85,28 @@ fun CropListPage(
 @Composable
 private fun CropList(
     modifier: Modifier = Modifier,
+    startIndex: () -> Int,
+    startOffset: () -> Int,
+    onChangeScrollPosition: (Int, Int) -> Unit,
     data: () -> SnapshotStateList<CropModel>,
     onLoadMore: () -> Unit,
     onClick: (CropModel) -> Unit,
 ) {
-    val listState = rememberLazyListState()
+    val listState = rememberLazyListState(
+        initialFirstVisibleItemIndex = startIndex.invoke(),
+        initialFirstVisibleItemScrollOffset = startOffset.invoke(),
+    )
     val reachedBottom by remember {
         derivedStateOf {
             listState.firstVisibleItemIndex + listState.layoutInfo.visibleItemsInfo.size ==
                     listState.layoutInfo.totalItemsCount
         }
+    }
+    LaunchedEffect(key1 = listState) {
+        snapshotFlow { listState.firstVisibleItemIndex to listState.firstVisibleItemScrollOffset }
+            .collect { (newIndex, newOffset) ->
+                onChangeScrollPosition.invoke(newIndex, newOffset)
+            }
     }
     LaunchedEffect(key1 = listState) {
         snapshotFlow { reachedBottom }
