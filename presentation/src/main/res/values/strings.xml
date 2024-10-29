@@ -19,6 +19,8 @@
     <string name="season_autumn">秋季</string>
     <string name="season_winter">冬季</string>
 
+    <string name="seed_list">种子列表</string>
+
     <string name="seed_manage">种子管理</string>
     <string name="crop_id">作物id</string>
     <string name="description">描述</string>

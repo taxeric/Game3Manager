@@ -31,7 +31,7 @@ interface Game3API {
         @Body model: CropModel
     ) : BaseAPIModel<Boolean>
 
-    @GET("/get-seed")
+    @GET("/get-seeds")
     suspend fun getSeeds(
         @Query("offset") offset: Int,
         @Query("limit") limit: Int,

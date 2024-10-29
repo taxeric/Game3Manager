@@ -1,8 +1,10 @@
 package com.lanier.game3.presentation.ext
 
 import com.lanier.game3.domain.model.CropModel
+import com.lanier.game3.domain.model.SeedModel
 import com.lanier.game3.presentation.feature.destinations.CropListPageDestination
 import com.lanier.game3.presentation.feature.destinations.CropPageDestination
+import com.lanier.game3.presentation.feature.destinations.SeedListPageDestination
 import com.lanier.game3.presentation.feature.destinations.SeedPageDestination
 import com.lanier.game3.presentation.navmodel.CropNavArgs
 import com.lanier.game3.presentation.navmodel.SeedNavArgs
@@ -16,6 +18,14 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun DestinationsNavigator.gotoCropListPage() {
     navigate(
         CropListPageDestination
+    ) {
+        launchSingleTop = true
+    }
+}
+
+fun DestinationsNavigator.gotoSeedListPage() {
+    navigate(
+        SeedListPageDestination
     ) {
         launchSingleTop = true
     }
@@ -88,6 +98,30 @@ fun DestinationsNavigator.gotoSeedPage(
                 singleHarvestAmount = singleHarvestAmount,
                 stageInfo = stageInfo,
                 plantLevel = plantLevel
+            )
+        )
+    ) {
+        launchSingleTop = true
+    }
+}
+
+fun DestinationsNavigator.gotoSeedPage(
+    seed: SeedModel
+) {
+    navigate(
+        SeedPageDestination(
+            SeedNavArgs(
+                seedId = seed.seedId,
+                cropId = seed.cropId,
+                name = seed.name,
+                price = seed.price,
+                desc = seed.desc,
+                season = seed.season,
+                maxHarvestCount = seed.maxHarvestCount,
+                cropExpPer = seed.cropExpPer,
+                singleHarvestAmount = seed.singleHarvestAmount,
+                stageInfo = seed.stageInfo,
+                plantLevel = seed.plantLevel
             )
         )
     ) {
