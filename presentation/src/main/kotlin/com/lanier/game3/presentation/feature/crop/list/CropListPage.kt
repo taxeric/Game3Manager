@@ -120,6 +120,7 @@ private fun CropList(
     LazyColumn(
         modifier = modifier
             .fillMaxWidth(),
+        state = listState,
     ) {
         itemsIndexed(
             items = data.invoke(),

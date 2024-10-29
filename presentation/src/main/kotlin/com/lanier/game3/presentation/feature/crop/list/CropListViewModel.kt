@@ -33,7 +33,7 @@ class CropListViewModel @Inject constructor(
         private set
 
     val crops = mutableStateListOf<CropModel>()
-    var page: Int = 0
+    var page: Int = 1
         private set
     var isEnd: Boolean = false
         private set
@@ -56,7 +56,7 @@ class CropListViewModel @Inject constructor(
 
     fun getCrops(refresh: Boolean = false, limit: Int = 20) {
         if (refresh) {
-            page = 0
+            page = 1
         } else {
             if (isEnd) return
         }
@@ -70,7 +70,7 @@ class CropListViewModel @Inject constructor(
                 limit = limit
             )
                 .onSuccess {
-                    if (page <= 0) {
+                    if (page <= 1) {
                         crops.clear()
                     }
                     crops.addAll(it)
