@@ -29,4 +29,8 @@
     <string name="single_harvest_amount">单次最多收获数量</string>
     <string name="stage_info">阶段信息</string>
     <string name="plant_level">种植等级</string>
+
+    <string name="market_manage">商店管理</string>
+    <string name="listed_true">已上架</string>
+    <string name="listed_false">已下架</string>
 </resources>

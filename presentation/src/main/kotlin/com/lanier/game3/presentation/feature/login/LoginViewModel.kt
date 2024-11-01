@@ -33,8 +33,8 @@ class LoginViewModel @Inject constructor(
 
     var loginUiState by mutableStateOf(
         LoginUiState(
-            inputAccount = "",
-            inputPassword = ""
+            inputAccount = "LaR10005",
+            inputPassword = "1248389474"
         )
     )
         private set

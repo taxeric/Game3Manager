@@ -2,9 +2,11 @@ package com.lanier.game3.data.di
 
 import com.lanier.game3.data.feature.CropRepositoryImpl
 import com.lanier.game3.data.feature.LoginRepositoryImpl
+import com.lanier.game3.data.feature.MarketRepositoryImpl
 import com.lanier.game3.data.feature.SeedRepositoryImpl
 import com.lanier.game3.domain.feature.crop.CropRepository
 import com.lanier.game3.domain.feature.login.LoginRepository
+import com.lanier.game3.domain.feature.market.MarketRepository
 import com.lanier.game3.domain.feature.seed.SeedRepository
 import dagger.Binds
 import dagger.Module
@@ -28,4 +30,7 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindSeedRepository(seedRepositoryImpl: SeedRepositoryImpl) : SeedRepository
+
+    @Binds
+    abstract fun bindMarketRepository(marketRepositoryImpl: MarketRepositoryImpl) : MarketRepository
 }
