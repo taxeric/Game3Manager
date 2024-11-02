@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.lanier.game3.manager"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.lanier.game3.manager"
