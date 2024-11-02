@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import com.lanier.game3.manager.presentation.R
 import com.lanier.game3.presentation.composable.AppTopBar
 import com.lanier.game3.presentation.ext.gotoCropListPage
+import com.lanier.game3.presentation.ext.gotoMarketPage
 import com.lanier.game3.presentation.ext.gotoSeedListPage
 import com.lanier.game3.presentation.ext.gotoSeedPage
 import com.ramcosta.composedestinations.annotation.Destination
@@ -54,6 +55,16 @@ fun HomePage(
         ) {
             Text(
                 text = stringResource(R.string.crop_manage)
+            )
+        }
+
+        OutlinedButton(
+            onClick = {
+                navigator.gotoMarketPage()
+            }
+        ) {
+            Text(
+                text = stringResource(R.string.market_manage)
             )
         }
     }

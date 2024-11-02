@@ -30,7 +30,7 @@ class MarketViewModel @Inject constructor(
     var pageScrollOffset by mutableIntStateOf(0)
         private set
 
-    var marketType: MarketType? = null
+    private var marketType: MarketType? = null
 
     var page: Int = 1
         private set
@@ -46,9 +46,10 @@ class MarketViewModel @Inject constructor(
 
     private var isInitialization = false
 
-    fun initialization() {
+    fun initialization(type: MarketType) {
         if (isInitialization) return
         isInitialization = true
+        this.marketType = type
         load(refresh = true)
     }
 

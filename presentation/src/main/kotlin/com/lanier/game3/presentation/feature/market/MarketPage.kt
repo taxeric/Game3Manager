@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lanier.game3.domain.model.MarketModel
+import com.lanier.game3.domain.model.MarketType
 import com.lanier.game3.manager.presentation.R
 import com.lanier.game3.presentation.composable.AppTopBar
 import com.ramcosta.composedestinations.annotation.Destination
@@ -47,6 +49,10 @@ fun MarketPage(
     viewmodel: MarketViewModel = hiltViewModel(),
     navigator: DestinationsNavigator
 ) {
+    LaunchedEffect(key1 = Unit) {
+        viewmodel.initialization(MarketType.Seed)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -115,6 +121,7 @@ private fun MarketList(
         modifier = modifier
             .fillMaxWidth(),
         state = listState,
+        contentPadding = PaddingValues(horizontal = 12.dp)
     ) {
         itemsIndexed(
             items = items.invoke(),
@@ -133,7 +140,6 @@ private fun MarketItem(
 ) {
     Row(
         modifier = modifier
-            .padding(horizontal = 12.dp)
             .clickable { onClick.invoke() },
         verticalAlignment = Alignment.CenterVertically,
     ) {

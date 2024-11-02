@@ -4,6 +4,7 @@ import com.lanier.game3.domain.model.CropModel
 import com.lanier.game3.domain.model.SeedModel
 import com.lanier.game3.presentation.feature.destinations.CropListPageDestination
 import com.lanier.game3.presentation.feature.destinations.CropPageDestination
+import com.lanier.game3.presentation.feature.destinations.MarketPageDestination
 import com.lanier.game3.presentation.feature.destinations.SeedListPageDestination
 import com.lanier.game3.presentation.feature.destinations.SeedPageDestination
 import com.lanier.game3.presentation.navmodel.CropNavArgs
@@ -124,6 +125,14 @@ fun DestinationsNavigator.gotoSeedPage(
                 plantLevel = seed.plantLevel
             )
         )
+    ) {
+        launchSingleTop = true
+    }
+}
+
+fun DestinationsNavigator.gotoMarketPage() {
+    navigate(
+        MarketPageDestination
     ) {
         launchSingleTop = true
     }
