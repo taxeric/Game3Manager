@@ -2,6 +2,7 @@ package com.lanier.game3.presentation.feature.market
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,10 +32,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil3.compose.AsyncImage
 import com.lanier.game3.domain.model.MarketModel
 import com.lanier.game3.domain.model.MarketType
 import com.lanier.game3.manager.presentation.R
 import com.lanier.game3.presentation.composable.AppTopBar
+import com.lanier.game3.presentation.ext.buildItemLoadUrl
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -121,7 +124,7 @@ private fun MarketList(
         modifier = modifier
             .fillMaxWidth(),
         state = listState,
-        contentPadding = PaddingValues(horizontal = 12.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         itemsIndexed(
             items = items.invoke(),
@@ -140,16 +143,16 @@ private fun MarketItem(
 ) {
     Row(
         modifier = modifier
-            .clickable { onClick.invoke() },
+            .clickable { onClick.invoke() }
+            .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(
+        AsyncImage(
             modifier = Modifier
-                .size(64.dp)
-                .background(Color.LightGray)
-        ) {
-            // 占位
-        }
+                .size(32.dp),
+            model = model.itemId.buildItemLoadUrl(),
+            contentDescription = "pic"
+        )
         Spacer(modifier = Modifier.width(12.dp))
         Column(
             modifier = Modifier

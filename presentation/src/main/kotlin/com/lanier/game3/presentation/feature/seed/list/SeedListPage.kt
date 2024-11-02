@@ -1,13 +1,17 @@
 package com.lanier.game3.presentation.feature.seed.list
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -25,9 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil3.compose.AsyncImage
 import com.lanier.game3.domain.model.SeedModel
 import com.lanier.game3.manager.presentation.R
 import com.lanier.game3.presentation.composable.AppTopBar
+import com.lanier.game3.presentation.ext.buildItemLoadUrl
 import com.lanier.game3.presentation.ext.gotoSeedPage
 import com.lanier.game3.presentation.model.getSeasonStrResId
 import com.ramcosta.composedestinations.annotation.Destination
@@ -60,8 +66,7 @@ fun SeedListPage(
         )
 
         CropList(
-            modifier = Modifier
-                .padding(horizontal = 12.dp),
+            modifier = Modifier,
             startIndex = { viewmodel.pageScrollItemIndex },
             startOffset = { viewmodel.pageScrollOffset },
             onChangeScrollPosition = { newIndex, newOffset ->
@@ -125,6 +130,7 @@ private fun CropList(
         modifier = modifier
             .fillMaxWidth(),
         state = listState,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         itemsIndexed(
             items = data.invoke(),
@@ -144,36 +150,49 @@ private fun SeedItem(
     seed: SeedModel,
     onClick: () -> Unit,
 ) {
-    Column(
+    Row(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick.invoke() }
-            .padding(8.dp)
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(
-            text = "${seed.cropId}",
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Box(
+        AsyncImage(
             modifier = Modifier
-                .fillMaxWidth(),
+                .size(32.dp),
+            model = seed.seedId.buildItemLoadUrl(),
+            contentDescription = "pic"
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Column(
+            modifier = Modifier
+                .weight(1f)
         ) {
             Text(
-                text = seed.name,
-                style = MaterialTheme.typography.bodyMedium,
+                text = "${seed.cropId}",
+                style = MaterialTheme.typography.titleMedium,
             )
-            Text(
+            Spacer(modifier = Modifier.height(4.dp))
+            Box(
                 modifier = Modifier
-                    .align(Alignment.CenterEnd),
-                text = stringResource(getSeasonStrResId(seed.season)),
-                style = MaterialTheme.typography.bodySmall
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = seed.name,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd),
+                    text = stringResource(getSeasonStrResId(seed.season)),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "${seed.price}",
+                style = MaterialTheme.typography.bodyMedium
             )
         }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = "${seed.price}",
-            style = MaterialTheme.typography.bodyMedium
-        )
     }
 }
